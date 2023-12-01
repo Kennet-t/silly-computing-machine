@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DNS Lookup Tool</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="lookup.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <h1>DNS Lookup Tool</h1>
+        <form id="lookup-form">
+            <input type="text" id="domain" name="domain" placeholder="example.com" required>
+            <br>
+            <input type="submit" value="Lookup">
+        </form>
+        <div id="results">
+            <div id="loading" style="display:none;">Loading...</div>
+        </div>
+    </div>
+</body>
+</html>
