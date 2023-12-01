@@ -1,14 +1,47 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 body {
     font-family: Arial, sans-serif;
     text-align: center;
     background-color: #f4f4f4;
 }
 
+header {
+    background-color: #333;
+    padding: 20px;
+}
+
+nav ul {
+    list-style-type: none;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 10px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+}
+
+
+nav ul li a:hover {
+    background-color: #4CAF50;
+}
+
 .container {
     width: 100%;
     max-width: 800px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 40px 20px;
 }
 
 form {
