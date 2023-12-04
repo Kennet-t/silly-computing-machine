@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subnet Calculator</title>
+    <title>SSL/TLS Checker</title>
     <link rel="stylesheet" href="style.css">
-    <script src="subnet-calculator.js" defer></script>
 </head>
 <body>
     <header>
@@ -23,21 +21,19 @@
                 </li>
             </ul>
         </nav>
-        
     </header>
     <main>
         <div class="container">
-            <h1>Subnet Calculator</h1>
-            <p>Enter IP Address and Prefix Length:</p>
-            <form id="subnet-form">
-                <input type="text" id="ip-address" name="ip-address" placeholder="192.168.1.25" required>
-                <input type="number" id="prefix-length" name="prefix-length" placeholder="24" min="0" max="32" required>
-                <br>
-                <input type="submit" value="Calculate">
+            <h1>SSL/TLS Checker</h1>
+            <form id="ssl-check-form">
+                <input type="text" id="domain" name="domain" placeholder="Enter the website / hostname" required>
+                <input type="submit" value="Check SSL/TLS">
             </form>
-            <div id="subnet-results"></div>
+            <div id="result">
+                <!-- The result will be displayed here -->
+            </div>
         </div>
     </main>
+    <script src="ssl-check.js"></script>
 </body>
-
 </html>
