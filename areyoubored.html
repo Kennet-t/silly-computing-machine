@@ -32,38 +32,55 @@
   const ctx = canvas.getContext('2d');
   const counterDiv = document.getElementById('counter');
 
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  // Set initial canvas size
+  setCanvasSize();
 
   let posX = canvas.width / 2;
   let posY = canvas.height / 2;
   let velocityX = 2;
   let velocityY = 2;
-  let disketteColor = 'white';
+  let objectColor = 'white';
   let Bounces = 0;
     
-  function drawDisketteDrive(x, y, color) {
-    ctx.fillStyle = color;
-  
-    // Rectangle body
-    ctx.fillRect(x, y, 100, 75);
+  function drawASCIIFloppyDisk(x, y, color) {
+    // ASCII art for a floppy disk
+    const asciiArt = [
+      " _________________",
+      "| | ___________ |o|",
+      "| | ___________ | |",
+      "| | ___________ | |",
+      "| | ___________ | |",
+      "| |_____________| |",
+      "|   ___________   |",
+      "|  |  ___      |  |",
+      "|  | |   |     |  |",
+      "|__|_|___|_____|__|"
+    ];
 
-    // Shutter area
-    ctx.fillRect(x + 5, y + 5, 90, 18);
-      
-    // Notch
-    ctx.clearRect(x + 77, y + 3, 12, 8);
+    const lineHeight = 15;
+    const characterWidth = 10;
+
+    for (let i = 0; i < asciiArt.length; i++) {
+      for (let j = 0; j < asciiArt[i].length; j++) {
+        if (asciiArt[i][j] !== ' ') {
+          ctx.fillStyle = color;
+        } else {
+          ctx.fillStyle = 'transparent'; // Use a transparent color for spaces
+        }
+        ctx.fillText(asciiArt[i][j], x + j * characterWidth, y + i * lineHeight);
+      }
+    }
   }
 
   function updatePosition() {
     posX += velocityX;
     posY += velocityY;
-    if (posX < 0 || posX + 100 > canvas.width) {
+    if (posX < 0 || posX + 180 > canvas.width) {
       velocityX *= -1;
       changeColor();
       incrementCounter();
     }
-    if (posY < 0 || posY + 75 > canvas.height) {
+    if (posY < 0 || posY + 135 > canvas.height) {
       velocityY *= -1;
       changeColor();
       incrementCounter();
@@ -71,7 +88,7 @@
   }
 
   function changeColor() {
-    disketteColor = randomHSLColor();
+    objectColor = randomHSLColor();
   }
 
   function incrementCounter() {
@@ -84,7 +101,7 @@
 
     updatePosition();
 
-    drawDisketteDrive(posX, posY, disketteColor);
+    drawASCIIFloppyDisk(posX, posY, objectColor);
 
     requestAnimationFrame(draw);
   }
@@ -92,6 +109,20 @@
   function randomHSLColor() {
     return `hsl(${Math.random() * 360}, 100%, 50%)`;
   }
+
+  // Function to set canvas size
+  function setCanvasSize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+
+  // Event listener for window resize
+  window.addEventListener('resize', function() {
+    setCanvasSize();
+    // Recalculate initial position
+    posX = canvas.width / 2;
+    posY = canvas.height / 2;
+  });
 
   draw();
 </script>
