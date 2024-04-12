@@ -26,7 +26,7 @@
 </head>
 <body>
 <canvas id="canvas"></canvas>
-<div id="counter">Bounce counter: 0</div>
+<div id="counter">Bounces: 0</div>
 <script>
   const canvas = document.getElementById('canvas');
   const ctx = canvas.getContext('2d');
@@ -40,7 +40,7 @@
   let velocityX = 2;
   let velocityY = 2;
   let disketteColor = 'white';
-  let collisions = 0;
+  let Bounces = 0;
     
   function drawDisketteDrive(x, y, color) {
     ctx.fillStyle = color;
@@ -75,8 +75,8 @@
   }
 
   function incrementCounter() {
-    collisions++;
-    counterDiv.textContent = `Collisions: ${collisions}`;
+    Bounces++;
+    counterDiv.textContent = `Bounces: ${Bounces}`;
   }
 
   function draw() {
