@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HypnoDisc</title>
+<style>
+  body {
+    margin: 0;
+    overflow: hidden;
+    background-color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+  }
+  
+  canvas {
+    display: block;
+  }
+
+  #counter {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+  }
+</style>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+<div id="counter">Collisions: 0</div>
+<script>
+  const canvas = document.getElementById('canvas');
+  const ctx = canvas.getContext('2d');
+  const counterDiv = document.getElementById('counter');
+
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  let posX = canvas.width / 2;
+  let posY = canvas.height / 2;
+  let velocityX = 2;
+  let velocityY = 2;
+  let disketteColor = 'white';
+  let collisions = 0;
+    
+  function drawDisketteDrive(x, y, color) {
+    ctx.fillStyle = color;
+  
+    // Rectangle body
+    ctx.fillRect(x, y, 100, 75);
+
+    // Shutter area
+    ctx.fillRect(x + 5, y + 5, 90, 18);
+      
+    // Notch
+    ctx.clearRect(x + 77, y + 3, 12, 8);
+  }
+
+  function updatePosition() {
+    posX += velocityX;
+    posY += velocityY;
+    if (posX < 0 || posX + 100 > canvas.width) {
+      velocityX *= -1;
+      changeColor();
+      incrementCounter();
+    }
+    if (posY < 0 || posY + 75 > canvas.height) {
+      velocityY *= -1;
+      changeColor();
+      incrementCounter();
+    }
+  }
+
+  function changeColor() {
+    disketteColor = randomHSLColor();
+  }
+
+  function incrementCounter() {
+    collisions++;
+    counterDiv.textContent = `Collisions: ${collisions}`;
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    updatePosition();
+
+    drawDisketteDrive(posX, posY, disketteColor);
+
+    requestAnimationFrame(draw);
+  }
+
+  function randomHSLColor() {
+    return `hsl(${Math.random() * 360}, 100%, 50%)`;
+  }
+
+  draw();
+</script>
+</body>
+</html>
